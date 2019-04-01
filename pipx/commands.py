@@ -298,10 +298,12 @@ def install(
         if force:
             print(f"Installing to existing directory {str(venv_dir)!r}")
         else:
-            raise PipxError(
-                f"Not installing to existing directory {str(venv_dir)!r}. "
+            print(
+                f"{package!r} already seems to be installed. "
+                "Not modifying existing installation in {str(venv_dir)!r}. "
                 "Pass '--force' to force installation"
             )
+            return
 
     venv = Venv(venv_dir, python=python, verbose=verbose)
     venv.create_venv(venv_args, pip_args)

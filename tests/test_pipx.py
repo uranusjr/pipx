@@ -166,6 +166,10 @@ class TestPipxCommands(unittest.TestCase):
             [self.pipx_bin, "install", "-e", "pipx", "--spec", PIPX_PATH], check=True
         )
 
+    def test_install_existing_package(self):
+        subprocess.run([self.pipx_bin, "install", "pycowsay"], check=True)
+        subprocess.run([self.pipx_bin, "install", "pycowsay"], check=True)
+
     def test_runpip(self):
         subprocess.run([self.pipx_bin, "install", "pycowsay"], check=True)
         subprocess.run([self.pipx_bin, "runpip", "pycowsay", "list"], check=True)
