@@ -14,7 +14,7 @@
 <a href="https://travis-ci.org/pipxproject/pipx"><img src="https://travis-ci.org/pipxproject/pipx.svg?branch=master" /></a>
 
 <a href="https://pypi.python.org/pypi/pipx/">
-<img src="https://img.shields.io/badge/pypi-0.12.4.0-blue.svg" /></a>
+<img src="https://img.shields.io/badge/pypi-0.13.0.0b1-blue.svg" /></a>
 <a href="https://github.com/ambv/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 </p>
 
@@ -357,7 +357,8 @@ optional arguments:
 pipx upgrade-all --help
 usage: pipx upgrade-all [-h] [--include-deps] [--system-site-packages]
                         [--index-url INDEX_URL] [--editable]
-                        [--pip-args PIP_ARGS] [--verbose]
+                        [--pip-args PIP_ARGS] [--skip SKIP [SKIP ...]]
+                        [--verbose]
 
 Upgrades all packages within their virtual environments by running 'pip
 install --upgrade PACKAGE'
@@ -373,6 +374,8 @@ optional arguments:
   --editable, -e        Install a project in editable mode
   --pip-args PIP_ARGS   Arbitrary pip arguments to pass directly to pip
                         install/upgrade commands
+  --skip SKIP [SKIP ...]
+                        skip these packages
   --verbose
 
 ```
@@ -462,7 +465,8 @@ optional arguments:
 pipx reinstall-all --help
 usage: pipx reinstall-all [-h] [--include-deps] [--system-site-packages]
                           [--index-url INDEX_URL] [--editable]
-                          [--pip-args PIP_ARGS] [--verbose]
+                          [--pip-args PIP_ARGS] [--skip SKIP [SKIP ...]]
+                          [--verbose]
                           python
 
 Reinstalls all packages using a different version of Python.
@@ -488,6 +492,8 @@ optional arguments:
   --editable, -e        Install a project in editable mode
   --pip-args PIP_ARGS   Arbitrary pip arguments to pass directly to pip
                         install/upgrade commands
+  --skip SKIP [SKIP ...]
+                        skip these packages
   --verbose
 
 ```

@@ -246,13 +246,20 @@ def upgrade(
 
 
 def upgrade_all(
-    pipx_local_venvs: Path, pip_args: List[str], verbose: bool, *, include_deps: bool
+    pipx_local_venvs: Path,
+    pip_args: List[str],
+    verbose: bool,
+    *,
+    include_deps: bool,
+    skip: List[str],
 ):
     packages_upgraded = 0
     num_packages = 0
     for venv_dir in pipx_local_venvs.iterdir():
         num_packages += 1
         package = venv_dir.name
+        if package in skip:
+            continue
         if package == "pipx":
             package_or_url = PIPX_PACKAGE_NAME
         else:
@@ -444,9 +451,13 @@ def reinstall_all(
     venv_args: List[str],
     verbose: bool,
     include_deps: bool,
+    *,
+    skip: List[str],
 ):
     for venv_dir in pipx_local_venvs.iterdir():
         package = venv_dir.name
+        if package in skip:
+            continue
         uninstall(venv_dir, package, local_bin_dir, verbose)
 
         package_or_url = package

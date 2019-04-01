@@ -22,7 +22,7 @@ from .constants import (
 from .util import PipxError, mkdir
 
 
-__version__ = "0.12.4.0"
+__version__ = "0.13.0.0b1"
 
 
 def print_version() -> None:
@@ -191,7 +191,11 @@ def run_pipx_command(args, binary_args: List[str]):
         commands.uninstall_all(PIPX_LOCAL_VENVS, LOCAL_BIN_DIR, verbose)
     elif args.command == "upgrade-all":
         commands.upgrade_all(
-            PIPX_LOCAL_VENVS, pip_args, verbose, include_deps=args.include_deps
+            PIPX_LOCAL_VENVS,
+            pip_args,
+            verbose,
+            include_deps=args.include_deps,
+            skip=args.skip,
         )
     elif args.command == "reinstall-all":
         commands.reinstall_all(
@@ -202,6 +206,7 @@ def run_pipx_command(args, binary_args: List[str]):
             venv_args,
             verbose,
             args.include_deps,
+            skip=args.skip,
         )
     elif args.command == "runpip":
         if not venv_dir:
@@ -321,8 +326,10 @@ def get_command_parser():
         "Runs `pip install -U <pkgname>` for each package.",
         description="Upgrades all packages within their virtual environments by running 'pip install --upgrade PACKAGE'",
     )
+
     add_include_deps(p)
     add_pip_venv_args(p)
+    p.add_argument("--skip", nargs="+", help="skip these packages")
     p.add_argument("--verbose", action="store_true")
 
     p = subparsers.add_parser(
@@ -361,6 +368,7 @@ def get_command_parser():
     p.add_argument("python")
     add_include_deps(p)
     add_pip_venv_args(p)
+    p.add_argument("--skip", nargs="+", help="skip these packages")
     p.add_argument("--verbose", action="store_true")
 
     p = subparsers.add_parser(
