@@ -6,9 +6,7 @@ python:
 install:
   - pip install tox tox-venv
 script:
-  - python setup.py check --metadata --strict
   - tox
-  - tox -e docs
 
 cache:
   pip: true
