@@ -1,6 +1,7 @@
 dev
 
 - Fix cursor show/hide to work with older versions of Windows. (#610)
+- [feature] Introduce the `pipx.run` entry point group as an alternative way to declare an application for `pipx run`.
 
 0.16.0.0
 
